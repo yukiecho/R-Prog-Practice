@@ -20,3 +20,7 @@ head(sbux_prices_df)
 price_1 <- sbux_prices_df["3/1/1994",1]
 price_2 <- sbux_prices_df["3/1/1995",1]
 
+# Let us make a better plot by adding the following arguments to the plot function: type="l" specifies a line plot, 
+# col="blue" indicates that the line should be blue, lwd=2 doubles the line thickness, ylab="Adjusted close" adds a y-axis label 
+# And main="Monthly closing price of SBUX" adds a title.
+plot(sbux_df$Adj.Close,type="l",col="blue",lwd=2,ylab="Adjusted close",main ="Monthly closing price of SBUX",legend(x='topleft',legend='SBUX', lty=1, lwd=2, col='blue')
