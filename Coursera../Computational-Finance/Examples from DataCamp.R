@@ -23,4 +23,29 @@ price_2 <- sbux_prices_df["3/1/1995",1]
 # Let us make a better plot by adding the following arguments to the plot function: type="l" specifies a line plot, 
 # col="blue" indicates that the line should be blue, lwd=2 doubles the line thickness, ylab="Adjusted close" adds a y-axis label 
 # And main="Monthly closing price of SBUX" adds a title.
-plot(sbux_df$Adj.Close,type="l",col="blue",lwd=2,ylab="Adjusted close",main ="Monthly closing price of SBUX",legend(x='topleft',legend='SBUX', lty=1, lwd=2, col='blue')
+plot(sbux_df$Adj.Close,type="l",col="blue",lwd=2,ylab="Adjusted close",main ="Monthly closing price of SBUX",legend(x='topleft',legend='SBUX', lty=1, lwd=2, col='blue'
+
+# Denote n the number of time periods
+n <- nrow(sbux_prices_df)
+sbux_ret <- (sbux_prices_df[2:n,1]-sbux_prices_df[1:(n-1),1])/sbux_prices_df[1:(n-1),1]
+# Calculate the simple return,Rt=(Pt−Pt−1)/Pt−1
+# Notice that sbux_ret is not a data frame object,it's a "numeric" class
+class(sbux_ret)
+
+# Now add dates as names to the vector and print the first elements of sbux_ret to the console to check
+names(sbux_ret) <- sbux_df[2:181,1]
+head(sbux_ret)
+
+## Continuous Compounding
+# The sbux_df data frame is already loaded in your work space
+sbux_prices_df <- sbux_df[, "Adj.Close", drop=FALSE]
+
+# Denote n the number of time periods:
+n <- nrow(sbux_prices_df)
+sbux_ret <- ((sbux_prices_df[2:n, 1] - sbux_prices_df[1:(n-1), 1])/sbux_prices_df[1:(n-1), 1])
+
+# Compute continuously compounded 1-month returns
+sbux_ccret <- log(sbux_prices_df[2:n,1]) - log(sbux_prices_df[1:(n-1),1])
+
+# Assign names to the continuously compounded 1-month returns
+names(sbux_ccret) <- sbux_df[2:n,1]
