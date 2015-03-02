@@ -3,7 +3,7 @@ list <- read.xlsx("upsrate.xls",1)
 list_df <- data.frame(list)
 final <- read.xlsx("upsrate.xls",2)
 final_df <- data.frame(final)
-a <- rep(1,417)
+a <- rep(1,nrows(final_df)
 final_df[,"zone"] <- a
 
 for(i in 1:nrow(final_df)){
