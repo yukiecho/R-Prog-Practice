@@ -26,3 +26,5 @@ for (i in 10:31) {
   print (i)
   
 }
+
+write.table(file_df,"22222.csv")
