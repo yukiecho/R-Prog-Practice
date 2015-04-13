@@ -38,11 +38,14 @@ zone <- function(subzip){
   return (zonetable[a,3])
 }
 
-# substring zipcode
+#substring zipcode
 file_df["subzip"] <- NA
 file_df["zone"] <- NA
 file_df$subzip <- substr(file_df$Zip,1,3)
-file_df$zone <- zone(file_df$subzip)
+
+for (i in 1:nrow(file_df)) {
+  file_df[i,"zone"] <- zone(file_df[i,"subzip"])
+}
 
 write.table(file_df,"summary3.csv")
 
