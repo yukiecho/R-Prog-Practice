@@ -1,5 +1,6 @@
 # for Dyson MI & MIL
 
+
 library(xlsx)
 # ask user to enter a working path
 wk_path <- readline("enter a working path: ")
@@ -38,14 +39,16 @@ zone <- function(subzip){
   return (zonetable[a,3])
 }
 
-#substring zipcode
+# substring zipcode
 file_df["subzip"] <- NA
 file_df["zone"] <- NA
-file_df$subzip <- substr(file_df$Zip,1,3)
+file_df$subzip <- as.numeric(substr(file_df$Zip,1,3))
 
+#apply "zone"functions for each one
 for (i in 1:nrow(file_df)) {
+  if (is.na(file_df[i,8]) == TRUE) next
   file_df[i,"zone"] <- zone(file_df[i,"subzip"])
+  print(i)
 }
 
 write.table(file_df,"summary3.csv")
-
