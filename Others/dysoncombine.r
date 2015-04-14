@@ -13,7 +13,7 @@ reading_list <- c(3,5,11,12,14,21,29,34,44:46,49,52,53)
 
 #read function to avoid repeating processes
 read <- function(path) {
-  file  <- fread(path,header = FALSE, stringsAsFactors = FALSE, select = c(1:55), data.table = FALSE)
+  file  <- fread(path,header = FALSE, stringsAsFactors = FALSE, select = reading_list, data.table = FALSE)
 }
 
 runonce <- function(i) {
@@ -57,4 +57,4 @@ for (i in seq(3, 31, 7)) {
 print (c+1)
 
 #output
-write.table(file,"finaldyson.csv")
+write.table(file,row.names = FALSE)
