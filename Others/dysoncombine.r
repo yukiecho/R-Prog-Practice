@@ -13,7 +13,7 @@ reading_list <- c(3,5,11,12,14,21,29,34,44:46,49,52,53)
 
 #read function to avoid repeating processes
 read <- function(path) {
-  file  <- fread(path,header = FALSE, stringsAsFactors = FALSE, select = reading_list, data.table = FALSE)
+  file  <- fread(path,header = FALSE, stringsAsFactors = FALSE,select = c(1:55),data.table = FALSE)
 }
 
 runonce <- function(i) {
@@ -34,7 +34,6 @@ runonce <- function(i) {
 }
 
 file <- read("Invoice_00002209BP_030114.csv")
-print(nrow(file))
 
 #March
 for (i in seq(8, 29, 7)) {
@@ -56,5 +55,11 @@ for (i in seq(3, 31, 7)) {
 #check whether print enough files
 print (c+1)
 
+#add header
+header <- fread("ups_bill_csv_header.csv",header = FALSE, stringsAsFactors = FALSE,data.table = FALSE)
+header_list <- as.list(as.character(t(header)))
+
+names(file) <- header_list[1:55]
+
 #output
-write.table(file,row.names = FALSE)
+write.table(file,"dysonfinal.csv",row.names = FALSE)
